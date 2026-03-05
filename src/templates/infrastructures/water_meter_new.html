@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>New Water Meter</title>
+  </head>
+  <body>
+    <h1>Create Water Meter</h1>
+    <form method="post" action="{% url 'infrastructures:create' %}">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      <p>
+        {{ form.rg_code.label_tag }}
+        <br>
+        {{ form.rg_code }}
+        {{ form.rg_code.errors }}
+      </p>
+      <p>
+        {{ form.internal_number.label_tag }}
+        <br>
+        {{ form.internal_number }}
+        {{ form.internal_number.errors }}
+      </p>
+      <p>
+        {{ form.serial_id.label_tag }}
+        <br>
+        {{ form.serial_id }}
+        {{ form.serial_id.errors }}
+      </p>
+      <p>
+        {{ form.subscriber_name.label_tag }}
+        <br>
+        {{ form.subscriber_name }}
+        {{ form.subscriber_name.errors }}
+      </p>
+      <p>
+        {{ form.raw_address.label_tag }}
+        <br>
+        {{ form.raw_address }}
+        {{ form.raw_address.errors }}
+      </p>
+      <button type="submit">Create</button>
+    </form>
+    <p>
+      <a href="{% url 'infrastructures:list' %}">Cancel</a>
+    </p>
+  </body>
+</html>

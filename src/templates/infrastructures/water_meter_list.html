@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Water Meters</title>
+  </head>
+  <body>
+    <h1>Water Meters</h1>
+    <p>
+      <a href="{% url 'infrastructures:new' %}">Create new water meter</a>
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>RG</th>
+          <th>Internal #</th>
+          <th>Serial</th>
+          <th>Subscriber</th>
+          <th>Address</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for water_meter in water_meters %}
+          <tr>
+            <td>{{ water_meter.pk }}</td>
+            <td>{{ water_meter.rg_code }}</td>
+            <td>{{ water_meter.internal_number }}</td>
+            <td>{{ water_meter.serial_id }}</td>
+            <td>{{ water_meter.subscriber_name }}</td>
+            <td>{{ water_meter.raw_address }}</td>
+            <td>
+              <a href="{% url 'infrastructures:detail' pk=water_meter.pk %}">detail</a>
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="7">No water meters yet</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>

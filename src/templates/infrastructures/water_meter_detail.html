@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Water Meter Detail</title>
+  </head>
+  <body>
+    <h1>Water Meter {{ water_meter.serial_id }}</h1>
+  </body>
+  <ul>
+    <li>ID : {{ water_meter.pk }}</li>
+    <li>RG Code : {{ water_meter.rg_code }}</li>
+    <li>Internal Number : {{ water_meter.internal_number }}</li>
+    <li>Subsriber : {{ water_meter.subscriber_name }}</li>
+    <li>Address : {{ water_meter.raw_address }}</li>
+  </ul>
+  <p>
+    <a href="{% url 'infrastructures:edit' pk=water_meter.pk %}">Edit</a>
+  </p>
+  <form method="post"
+        action="{% url 'infrastructures:delete' pk=water_meter.pk %}">
+    {% csrf_token %}
+    <button type="submit">Delete</button>
+  </form>
+  <p>
+    <a href="{% url 'infrastructures:list' %}">Back to list</a>
+  </p>
+</body>
+</html>
