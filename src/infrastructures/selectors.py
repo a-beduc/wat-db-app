@@ -6,4 +6,4 @@ def water_meter_get_by_pk(pk):
 
 
 def water_meter_list_all():
-    return WaterMeter.objects.order_by('rg_code', 'serial_id')
+    return WaterMeter.objects.all()
