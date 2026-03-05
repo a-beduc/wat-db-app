@@ -14,6 +14,14 @@
     <li>Address : {{ water_meter.raw_address }}</li>
   </ul>
   <p>
+    <a href="{% url 'infrastructures:edit' pk=water_meter.pk %}">Edit</a>
+  </p>
+  <form method="post"
+        action="{% url 'infrastructures:delete' pk=water_meter.pk %}">
+    {% csrf_token %}
+    <button type="submit">Delete</button>
+  </form>
+  <p>
     <a href="{% url 'infrastructures:list' %}">Back to list</a>
   </p>
 </body>

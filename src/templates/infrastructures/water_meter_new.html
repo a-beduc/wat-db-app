@@ -39,5 +39,9 @@
         {{ form.raw_address.errors }}
       </p>
       <button type="submit">Create</button>
-    </body>
-  </html>
+    </form>
+    <p>
+      <a href="{% url 'infrastructures:list' %}">Cancel</a>
+    </p>
+  </body>
+</html>
