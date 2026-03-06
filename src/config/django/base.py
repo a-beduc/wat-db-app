@@ -10,21 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
-from config.env import env, ROOT_DIR, BASE_DIR
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = (
-    'django-insecure-$2-u+w(6i5$41nr4kdi71%k&z#(z@gh(b&9vf6dkw-h*=rfb#4'
-)
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+from config.env import BASE_DIR
 
 
 # Application definition
@@ -71,21 +57,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/6.0/ref/settings/#databases
-
-DATABASES = {
-    'default': env.db_url(
-        'SQLITE_URL', default=f'sqlite:///{ROOT_DIR / "db.sqlite3"}'
-    )
-    # {
-    #     "ENGINE": "django.db.backends.sqlite3",
-    #     "NAME": BASE_DIR / "db.sqlite3",
-    # }
-}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
