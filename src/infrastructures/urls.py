@@ -15,9 +15,11 @@ app_name = 'infrastructures'
 
 
 urlpatterns = [
+    # redirect default url to list view
+    path('', water_meter_list, name='home'),
+    path('list/', water_meter_list, name='list'),
     path('new/', water_meter_new, name='new'),
     path('create/', water_meter_create, name='create'),
-    path('list/', water_meter_list, name='list'),
     path('detail/<int:pk>/', water_meter_detail, name='detail'),
     path('edit/<int:pk>/', water_meter_edit, name='edit'),
     path('update/<int:pk>/', water_meter_update, name='update'),

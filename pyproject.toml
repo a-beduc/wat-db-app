@@ -8,7 +8,6 @@ dependencies = [
     "django>=6.0.3",
     "django-environ>=0.13.0",
     "django-stubs>=5.2.9",
-    "ruff>=0.15.4",
 ]
 
 [tool.ruff.format]
@@ -19,3 +18,19 @@ line-length = 79
 
 [tool.djlint]
 indent = 2
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.2",
+    "pytest-cov>=7.0.0",
+    "pytest-django>=4.12.0",
+    "ruff>=0.15.5",
+]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE="config.django.testing"
+pythonpath = "./src"
+testpaths = "./tests"
+
+[tool.ruff.lint.per-file-ignores]
+"src/config/django/*" = ["F403"]
