@@ -2,12 +2,34 @@ from django.db import models
 from django.core.exceptions import ValidationError
 
 
+class Address(models.Model):
+    street_number = models.CharField(max_length=20, blank=True)
+    street_name = models.CharField(max_length=150, blank=True)
+    address_complement = models.CharField(max_length=150, blank=True)
+    postal_code = models.CharField(max_length=10, blank=True)
+    city = models.CharField(max_length=100, blank=True)
+    notes = models.TextField(blank=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['city', 'postal_code', 'street_name', 'street_number']
+
+
 class WaterMeter(models.Model):
     rg_code = models.CharField(max_length=10)
     internal_number = models.IntegerField()
     serial_id = models.CharField(max_length=15)
     subscriber_name = models.CharField(max_length=200)
     raw_address = models.CharField(max_length=200)
+    address = models.ForeignKey(
+        Address,
+        on_delete=models.PROTECT,
+        related_name='water_meters',
+        null=True,
+        blank=True,
+    )
 
 
 class Reading(models.Model):

@@ -1,8 +1,9 @@
 import pytest
 from django.core.exceptions import ValidationError
+from django.db.models.deletion import ProtectedError
 from django.db.utils import IntegrityError
 
-from infrastructures.models import Reading, WaterMeter
+from infrastructures.models import Address, Reading, WaterMeter
 
 
 @pytest.fixture
@@ -53,3 +54,25 @@ def test_update_reading_is_blocked(water_meter):
         match=f'You may not edit an existing {Reading._meta.model_name}',
     ):
         reading.save()
+
+
+@pytest.mark.django_db
+def test_cannot_delete_address_if_linked_to_water_meter():
+    address = Address.objects.create(
+        street_number='123',
+        street_name='lambda street',
+        postal_code='00001',
+        city='Test city',
+    )
+
+    WaterMeter.objects.create(
+        rg_code='RG01',
+        internal_number=1,
+        serial_id='A00AA000000A',
+        subscriber_name='John Doe',
+        raw_address='123 lambda street',
+        address=address,
+    )
+
+    with pytest.raises(ProtectedError):
+        address.delete()
